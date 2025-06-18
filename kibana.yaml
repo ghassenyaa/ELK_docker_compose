@@ -1,0 +1,34 @@
+# Kibana Configuration
+server.host: "0.0.0.0"
+server.port: 5601
+server.name: "kibana"
+
+# SSL Configuration for Kibana server
+server.ssl.enabled: true
+server.ssl.certificate: "/usr/share/kibana/config/certs/kibana/kibana.crt"
+server.ssl.key: "/usr/share/kibana/config/certs/kibana/kibana.key"
+
+# Elasticsearch connection
+elasticsearch.hosts: ["https://elasticsearch:9200"]
+elasticsearch.username: "elastic"
+elasticsearch.password: "changeme123"
+
+# SSL Configuration for Elasticsearch connection
+elasticsearch.ssl.certificateAuthorities: ["/usr/share/kibana/config/certs/ca/ca.crt"]
+elasticsearch.ssl.verificationMode: "certificate"
+
+# Security settings
+xpack.security.enabled: true
+xpack.encryptedSavedObjects.encryptionKey: "something_at_least_32_characters_long_for_encryption"
+
+# Logging
+logging.appenders.file.type: "file"
+logging.appenders.file.fileName: "/usr/share/kibana/logs/kibana.log"
+logging.appenders.file.layout.type: "json"
+logging.loggers:
+  - name: "root"
+    appenders: ["default", "file"]
+    level: "info"
+
+# Monitoring
+monitoring.ui.container.elasticsearch.enabled: true
